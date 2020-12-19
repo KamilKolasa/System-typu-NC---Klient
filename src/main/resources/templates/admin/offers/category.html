@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Settings Offers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body th:if="${userRole == 'ROLE_ADMIN'}">
+
+<div th:include="admin/templates/navigation"></div>
+
+<div class="container">
+    <div th:include="admin/templates/navigationOffert"></div>
+
+    <br>
+    <h3>KATEGORIE</h3>
+
+    <form th:action="@{/settings/category}" method="post" th:object="${addCategory}">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="name">Nazwa</label>
+                        <input id="name" type="text" class="form-control" placeholder="podaj nazwe"
+                               th:field="*{name}" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <br><br>
+                <button class="btn btn-success" type="submit">Dodaj kategorie</button>
+            </div>
+        </div>
+    </form>
+
+<!--    <div class="row">-->
+<!--        <div class="col-sm-6">-->
+<!--            <table class="table">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th scope="col">Nazwa</th>-->
+<!--                    <th scope="col">Używany</th>-->
+<!--                    <th scope="col">Opcje</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody id="myTable">-->
+<!--                <tr th:each="q : ${allCategorys}">-->
+<!--                    <td th:text="${q.key.name}"></td>-->
+<!--                    <td th:text="${q.value}"></td>-->
+<!--                    <td>-->
+<!--                        <button type="button" class="btn btn-warning">Modyfikuj</button>-->
+<!--                        <button type="button" class="btn btn-danger">Usuń</button>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+
+</div>
+
+</body>
+</html>

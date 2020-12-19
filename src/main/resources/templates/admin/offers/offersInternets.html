@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Settings Offers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/searchTable.js"></script>
+</head>
+<body th:if="${userRole == 'ROLE_ADMIN'}">
+
+<div th:include="admin/templates/navigation"></div>
+
+<div class="container">
+    <div th:include="admin/templates/navigationOffert"></div>
+    <hr>
+    <h3 class="text-center">INTERNET</h3>
+    <hr>
+    <br>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#id1">Dodaj nową oferte internetu</button>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#id2">Tabela ofert internetowych</button>
+
+    <div id="id1" class="collapse">
+
+        <br>
+        <hr>
+        <h3 class="text-center">Dodaj nową oferte internetu</h3>
+        <hr>
+
+        <form th:action="@{/settings/offersInternet}" method="post" th:object="${addPackInternet}">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Nazwa</label>
+                        <input id="name" type="text" class="form-control" placeholder="podaj nazwe"
+                               th:field="*{name}" required="required"/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="price">Cena</label>
+                        <input id="price" type="number" class="form-control" placeholder="podaj cene"
+                               th:field="*{price}" required="required"/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Rodzaj internetu</label>
+                        <select th:field="*{typeInternet}" class="form-control">
+                            <option
+                                    th:each="e : ${typeInternets}"
+                                    th:value="${e}"
+                                    th:text="${e.fullName}"
+                            ></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="download">Prędkość pobierania [mB/s]</label>
+                        <input id="download" type="number" class="form-control" placeholder="podaj prędkość pobierania"
+                               th:field="*{speedDownload}" required="required"/>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="upload">Prędkość wysyłania [mB/s]</label>
+                        <input id="upload" type="number" class="form-control" placeholder="podaj prędkość wysyłania"
+                               th:field="*{speedUpload}" required="required"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="description">Opis</label>
+                        <textarea rows="3" id="description" type="text" class="form-control" placeholder="podaj opis"
+                                  th:field="*{description}" required="required"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn btn-success btn-block" type="submit">Dodaj</button>
+        </form>
+    </div>
+
+    <div id="id2" class="collapse">
+
+        <br>
+        <hr>
+        <h3 class="text-center">Tabela ofert internetowych</h3>
+        <hr>
+
+        <input class="form-control" id="myInput" type="text" placeholder="Wyszukiwarka">
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Rodzaj</th>
+                <th scope="col">Prędkość<br>pobierania [mB/s]</th>
+                <th scope="col">Prędkość<br>wysyłania [mB/s]</th>
+                <th scope="col">Opcje</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr th:each="q : ${allPackInternets}">
+                <td th:text="${q.name}"></td>
+                <td style="width: 35%;" th:text="${q.description}"></td>
+                <td th:text="${q.price}"></td>
+<!--                <td th:text="${q.typeInternet.fullName}"></td>-->
+                <td th:text="${q.typeInternet}"></td>
+                <td th:text="${q.speedDownload}"></td>
+                <td th:text="${q.speedUpload}"></td>
+                <td>
+                    <button type="button" class="btn btn-warning">Modyfikuj</button>
+                    <button type="button" class="btn btn-danger">Usuń</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+</div>
+
+</body>
+</html>

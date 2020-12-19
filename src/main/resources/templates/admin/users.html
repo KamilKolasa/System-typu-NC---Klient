@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Settings Users</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/searchTable.js"></script>
+</head>
+<body th:if="${userRole == 'ROLE_ADMIN'}">
+
+<div th:include="admin/templates/navigation"></div>
+
+<div class="container">
+    <hr>
+    <h1 class="text-center">UŻYTKOWNICY</h1>
+    <hr>
+    <button type="button" class="btn btn-warning btn-lg" data-toggle="collapse" data-target="#id1">Klienci</button>
+    <button type="button" class="btn btn-warning btn-lg" data-toggle="collapse" data-target="#id2">Administratorzy</button>
+
+    <div id="id1" class="collapse">
+        <hr>
+        <h3 class="text-center">KLIENCI</h3>
+        <hr>
+        wielka tabela z uzytkownikami z roznymi dodatkowymi danymi np ile wydaje i opcjami typu ban
+
+        <input class="form-control" id="myInput" type="text" placeholder="Wyszukiwarka">
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nick</th>
+                <th scope="col">Email</th>
+                <th scope="col">Aktywowane</th>
+                <th scope="col">cos1</th>
+                <th scope="col">cos2</th>
+                <th scope="col">cos3</th>
+                <th scope="col">Opcje</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr th:each="q : ${allUsers}">
+                <td th:text="${q.username}"></td>
+                <td th:text="${q.email}"></td>
+                <td th:text="${q.enabled}"></td>
+                <td>Niezrobione</td>
+                <td>Niezrobione</td>
+                <td>Niezrobione</td>
+                <td>
+                    <button type="button" class="btn btn-danger">Zablokuj</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div id="id2" class="collapse">
+        <hr>
+        <h3 class="text-center">ADMINISTRATORZY</h3>
+        <hr>
+        tabela z adminami - opcje typu wylaczenie admina
+
+        <input class="form-control" id="myInput2" type="text" placeholder="Wyszukiwarka">
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nick</th>
+                <th scope="col">Email</th>
+                <th scope="col">Opcje</th>
+            </tr>
+            </thead>
+            <tbody id="myTable2">
+            <tr th:each="q : ${allAdmins}">
+                <td th:text="${q.username}"></td>
+                <td th:text="${q.email}"></td>
+                <td>
+                    <button type="button" class="btn btn-danger">Zablokuj</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Settings Offers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/searchTable.js"></script>
+    <script src="/js/channelList.js"></script>
+</head>
+<body th:if="${userRole == 'ROLE_ADMIN'}">
+
+<div th:include="admin/templates/navigation"></div>
+
+<div class="container">
+    <div th:include="admin/templates/navigationOffert"></div>
+    <hr>
+    <h3 class="text-center">TELEWIZJA</h3>
+    <hr>
+    <br>
+
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#id1">Dodaj nową oferte telewizji
+    </button>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#id2">Tabela ofert telewizyjnych
+    </button>
+
+    <div id="id1" class="collapse">
+
+        <br>
+        <hr>
+        <h3 class="text-center">Dodaj nową oferte telewizji</h3>
+        <hr>
+
+        <form th:action="@{/settings/offersChannels}" method="post" th:object="${addPackTv}">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Nazwa</label>
+                        <input id="name" type="text" class="form-control" placeholder="podaj tytuł"
+                               th:field="*{name}" required="required"/>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="price">Cena</label>
+                        <input id="price" type="number" class="form-control" placeholder="podaj cene"
+                               th:field="*{price}" required="required"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="description">Opis</label>
+                <textarea rows="3" id="description" type="text" class="form-control" placeholder="podaj opis"
+                          th:field="*{description}" required="required"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Lista kanałów</label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 1
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 2
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 3
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 4
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 5
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 6
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 7
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 8
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">Option 9
+                </label>
+            </div>
+
+            <button class="btn btn-success btn-block" type="submit">Dodaj</button>
+        </form>
+
+    </div>
+
+    <div id="id2" class="collapse">
+
+        <br>
+        <hr>
+        <h3 class="text-center">Tabela ofert telewizyjnych</h3>
+        <hr>
+
+        <input class="form-control" id="myInput" type="text" placeholder="Wyszukiwarka">
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Kanały</th>
+                <th scope="col">Opcje</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr th:each="q : ${allPackTvs}">
+                <td th:text="${q.name}"></td>
+                <td style="width: 45%;" th:text="${q.description}"></td>
+                <td th:text="${q.price}"></td>
+                <td th:text="NIEZROBIONE"></td>
+                <!--<td><button type="button" class="btn btn-default" href="#" data-toggle="popover" data-placement="top" data-trigger="focus"-->
+                <!--data-content="TVP1, TVP2, Polstat, TVN,...">24</button></td>-->
+                <td>
+                    <button type="button" class="btn btn-warning">Modyfikuj</button>
+                    <button type="button" class="btn btn-danger">Usuń</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+</div>
+
+</body>
+</html>

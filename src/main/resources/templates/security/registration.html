@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/security.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/"><img src="/img/logoNC.png"></a>
+            Internetowe Centrum Abonenta
+        </div>
+    </div>
+</nav>
+
+<div class="bg-pic container-fluid">
+    <div class="row">
+        <div class="col-sm-4"></div>
+
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <form th:action="@{/security/registration}" method="post" th:object="${createUserDto}">
+                    <div class="panel-heading text-center">
+                        <h4>REJESTRACJA</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="username">Login</label>
+                            <input id="username" type="text" class="form-control" placeholder="podaj login" th:field="*{username}" required="required" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input id="email" type="text" class="form-control" placeholder="podaj e-mail" th:field="*{email}" required="required" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Hasło</label>
+                            <input id="password" type="password" class="form-control" placeholder="podaj hasło" th:field="*{password}" required="required" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Powtórz hasło</label>
+                            <input id="passwordConfirmation" type="password" class="form-control" placeholder="powtórz hasło" th:field="*{passwordConfirmation}" required="required" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel-footer text-left">
+                                <a class="btn btn-lg" href="/security/login">WRÓĆ</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel-footer text-right">
+                                <button class="btn btn-lg" type="submit">ZAREJESTRUJ SIĘ</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="container-fluid text-center">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">Copyright © 2019 ITI Neovision</div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-earphone"></span> +48 111 555 999 | 4444 333 777 *
+            </br>* opłata wg stawek operatora
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
